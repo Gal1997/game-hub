@@ -3,8 +3,8 @@ import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 
 interface Props {
-  onSelectSortingMethod: (sortingMethod: String) => void;
-  selectedSortingMethod: String | null;
+  onSelectSortingMethod: (sortingMethod: string) => void;
+  selectedSortingMethod: string | null;
 }
 
 const SortSelector = ({
