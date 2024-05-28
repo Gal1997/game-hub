@@ -35,8 +35,8 @@ function App() {
          "aside main"`,
       }}
       templateColumns={{
-        base: "1fr",
-        lg: "200px 1fr",
+        base: "1fr", // on Phone take whole space
+        lg: "200px 1fr", // on tablet/PC give 'aside' (genres) 200px , the rest to main
       }}
     >
       <GridItem area="nav">
