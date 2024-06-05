@@ -1,6 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-
-import axios, { AxiosError } from "axios";
 import apiClient, { FetchResponse } from "../services/api-client";
 
 export interface Genre {
