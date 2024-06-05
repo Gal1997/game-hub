@@ -6,3 +6,8 @@ export default axios.create({
     key: "3678c087bf7a49a79d9d8dcb578d20ed",
   },
 });
+
+export interface FetchResponse<T> {
+  count: number;
+  results: T[];
+}
