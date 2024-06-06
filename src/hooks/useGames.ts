@@ -1,8 +1,9 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { AxiosError, AxiosRequestConfig } from "axios";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { GameQuery } from "../App";
 import APIClient, { FetchResponse } from "../services/api-client";
 import { Platform } from "./usePlatforms";
+import ms from "ms";
 
 export interface Game {
   id: number;
@@ -35,7 +36,7 @@ const useGames = (gameQuery: GameQuery) =>
           page_size: 16, // Each chunk of fetched games will be 16
         },
       }),
-    staleTime: 24 * 60 * 60 * 1000,
+    staleTime: ms("24h"),
     keepPreviousData: true,
     getNextPageParam: (lastPage, allPagesFetched) => {
       return lastPage.next ? allPagesFetched.length + 1 : undefined;
