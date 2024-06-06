@@ -27,12 +27,10 @@ const useGames = (gameQuery: GameQuery) =>
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
-          genres: gameQuery.genre?.id,
-          parent_platforms: gameQuery.platform?.id,
+          genres: gameQuery.genreId,
+          parent_platforms: gameQuery.platformId,
           ordering: gameQuery.sortingMethod,
           search: gameQuery.searchText,
-          _start: (pageParam - 1) * gameQuery.pageSize,
-          _limit: gameQuery.pageSize,
           page: pageParam,
           page_size: 16, // Each chunk of fetched games will be 16
         },
