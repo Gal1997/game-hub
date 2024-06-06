@@ -34,7 +34,7 @@ const useGames = (gameQuery: GameQuery) =>
           _start: (pageParam - 1) * gameQuery.pageSize,
           _limit: gameQuery.pageSize,
           page: pageParam,
-          page_size: 16, //
+          page_size: 16, // Each chunk of fetched games will be 16
         },
       }),
     staleTime: 24 * 60 * 60 * 1000,
