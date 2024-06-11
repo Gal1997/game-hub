@@ -1,9 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { GameQuery } from "../App";
 import APIClient, { FetchResponse } from "../services/api-client";
 import { Platform } from "./usePlatforms";
 import ms from "ms";
+import useGameQueryStore from "../store";
 
 export interface Game {
   id: number;
@@ -16,14 +16,15 @@ export interface Game {
 
 const apiClient = new APIClient<Game>("/games");
 
-const useGames = (gameQuery: GameQuery) =>
+const useGames = () => {
   /* useInfiniteQuery will return an array of FetchResponse<Game> (instead of a single one)
      and it is because it is paginated , meaning that the data is now split into groups (pages) and 
      is no longer a single page (hence return type is now array)
      This forces us to map twice in GameGrid.tsx:
      * first - map each page to a react fragment
      * second - map each game in that fragment into a GameCard  */
-  useInfiniteQuery<FetchResponse<Game>, AxiosError>({
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
+  return useInfiniteQuery<FetchResponse<Game>, AxiosError>({
     queryKey: ["games", gameQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
@@ -42,5 +43,5 @@ const useGames = (gameQuery: GameQuery) =>
       return lastPage.next ? allPagesFetched.length + 1 : undefined;
     },
   });
-
+};
 export default useGames;
