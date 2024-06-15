@@ -10,20 +10,27 @@ import {
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import useGameQueryStore from "../store";
+import GenreSkeleton from "./GenreSkeleton";
 
 const GenreList = () => {
   const { data, isLoading, error } = useGenres();
   const setGenreId = useGameQueryStore((s) => s.setGenreId);
   const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
 
+  const skeletons = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+  ];
   if (error) return null;
-  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <>
       <Heading marginBottom={3} fontSize={"2xl"}>
         Genres
       </Heading>
+      {isLoading &&
+        skeletons.map((skeleton) => (
+          <GenreSkeleton key={skeleton}></GenreSkeleton>
+        ))}
       <List>
         {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
