@@ -1,6 +1,6 @@
 import { Grid, GridItem, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import { Game } from "../entities/Game";
+import  Game  from "../entities/Game";
 import CriticScore from "./CriticScore";
 import GameTrailers from "./GameTrailers";
 

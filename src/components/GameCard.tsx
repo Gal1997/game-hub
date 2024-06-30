@@ -1,6 +1,6 @@
 import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Game } from "../entities/Game";
+import Game from "../entities/Game";
 import getCroppedImageUrl from "../services/image-url";
 import CriticScore from "./CriticScore";
 import PlatformIconList from "./PlatformIconList";
@@ -16,7 +16,11 @@ const GameCard = ({ game }: Props) => {
       <CardBody>
         <HStack justifyContent="space-between" marginBottom={2}>
           <PlatformIconList
-            platforms={game.parent_platforms.map((p) => p.platform)}
+            platforms={
+              game.parent_platforms
+                ? game.parent_platforms.map((p) => p.platform)
+                : []
+            }
           ></PlatformIconList>
           <CriticScore score={game.metacritic}></CriticScore>
         </HStack>

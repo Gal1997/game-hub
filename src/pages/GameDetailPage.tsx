@@ -6,6 +6,8 @@ import {
   Image,
   HStack,
   Flex,
+  SimpleGrid,
+  GridItem,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -23,25 +25,31 @@ const GameDetailPage = () => {
   if (error || !game) throw error;
 
   return (
-    <Box padding={5}>
-      <Flex>
-        <Image
-          marginEnd={10}
-          marginTop={2}
-          src={game.background_image}
-          boxSize="150px"
-          objectFit="cover"
-          rounded={40}
-        ></Image>
-        <Box>
-          <Heading>{game.name}</Heading>
-          <ExpandableText>{game.description_raw}</ExpandableText>
+    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} padding={5}>
+      <GridItem>
+        <Flex>
+          <Image
+            marginEnd={5}
+            marginTop={2}
+            src={game.background_image}
+            boxSize="150px"
+            objectFit="cover"
+            rounded={40}
+          ></Image>
+          <Box>
+            <Heading>{game.name}</Heading>
+            <ExpandableText>{game.description_raw}</ExpandableText>
+          </Box>
+        </Flex>
+        <GameAttributes game={game}></GameAttributes>
+      </GridItem>
+      <GridItem>
+        <Box padding={5}>
+          <GameTrailers gameId={game.id}></GameTrailers>
+          <GameScreenshots gameId={game.id}></GameScreenshots>
         </Box>
-      </Flex>
-      <GameAttributes game={game}></GameAttributes>
-      <GameTrailers gameId={game.id}></GameTrailers>
-      <GameScreenshots gameId={game.id}></GameScreenshots>
-    </Box>
+      </GridItem>
+    </SimpleGrid>
   );
 };
 
